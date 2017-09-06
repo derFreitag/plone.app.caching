@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_parent
-from import api
+from plone import api
 from plone.app.caching.utils import getObjectDefaultView
 from plone.app.caching.utils import isPurged
 from plone.behavior.interfaces import IBehaviorAssignable
@@ -126,14 +126,17 @@ class ContentPurgePaths(object):
 
             if INamedImageField.providedBy(item):
                 for size in self.getScales():
-                    yield '{0}/@@images/{1}/{2}'.format(prefix, field, size,)
-                    yield '{0}/@@download/{1}'.format(prefix, field)
+                    paths.append(
+                        '{0}/@@images/{1}/{2}'.format(prefix, field, size,))
+                    paths.append(
+                        '{0}/@@download/{1}'.format(prefix, field))
             else:
                 filename = value.filename
                 if isinstance(filename, unicode):
                     filename = filename.encode('utf-8')
 
-                yield '{0}/@@download/{1}/{2}'.format(prefix, field, filename)
+                paths.append(
+                    '{0}/@@download/{1}/{2}'.format(prefix, field, filename))
 
         return paths
 
