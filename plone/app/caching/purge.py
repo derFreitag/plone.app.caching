@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_parent
-from plone import api
 from plone.app.caching.utils import getObjectDefaultView
 from plone.app.caching.utils import isPurged
 from plone.behavior.interfaces import IBehaviorAssignable
@@ -10,6 +9,7 @@ from plone.dexterity.interfaces import IDexteritySchema
 from plone.memoize.instance import memoize
 from plone.namedfile.interfaces import INamedBlobFileField
 from plone.namedfile.interfaces import INamedImageField
+from plone.registry.interfaces import IRegistry
 from Products.CMFCore.interfaces import IContentish
 from Products.CMFCore.interfaces import IDiscussionResponse
 from Products.CMFCore.interfaces import IDynamicType
@@ -59,7 +59,8 @@ class ContentPurgePaths(object):
         self.context = context
 
     def getScales(self):
-        reg_list = api.portal.get_registry_record('plone.allowed_sizes')
+        registry = getUtility(IRegistry)
+        reg_list = registry['plone.allowed_sizes']
         sizes = [i.split(' ', 1)[0] for i in reg_list]
         sizes.append('download')
         return sizes

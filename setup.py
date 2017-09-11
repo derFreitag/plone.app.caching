@@ -51,7 +51,6 @@ setup(
         'Products.statusmessages',
         'Zope2',
         'Acquisition',
-        'plone.api',
         'plone.app.z3cform',
         'z3c.form',
         'z3c.zcmlhook',
