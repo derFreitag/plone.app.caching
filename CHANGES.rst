@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.0.6.post0 (2020-08-21)
+------------------------
+
+Bug fixes:
+
+
+- Check if there is a request at all before purging.
+  [gforcada] (#56)
+
+
 2.0.6 (2020-06-24)
 ------------------
 
